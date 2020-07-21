@@ -131,7 +131,7 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     slider();
 
-    // включить display flex у .nav при клике  и доработать с закрытием окна
+    // menuButton
     const menuButton = () => {
         const burger = document.getElementById('burger');
         const nav = document.querySelector('.nav');

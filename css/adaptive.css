@@ -434,8 +434,8 @@
     }
 
     .advantages-title {
-        margin-top: 70px;
-        margin-bottom: 30px;
+        margin: 70px auto 30px auto;
+        max-width: 270px;
     }
 
     .advantage-title {
