@@ -131,4 +131,23 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     slider();
 
+    // включить display flex у .nav при клике  и доработать с закрытием окна
+    const menuButton = () => {
+        const burger = document.getElementById('burger');
+        const nav = document.querySelector('.nav');
+        console.log(nav);
+
+        burger.addEventListener('click', () => {
+            nav.style.display = 'flex';
+        });
+
+        document.addEventListener('click', (e) => {
+            let target = event.target;
+            if (target.classList.contains('nav-item') ||
+            target.classList.contains('menu-cross')) {
+                nav.style.display = 'none';
+            }
+        });
+    };
+    menuButton();
 });
