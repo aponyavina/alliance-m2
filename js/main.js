@@ -135,17 +135,18 @@ window.addEventListener('DOMContentLoaded', () => {
     const menuButton = () => {
         const burger = document.getElementById('burger');
         const nav = document.querySelector('.nav');
-        console.log(nav);
 
         burger.addEventListener('click', () => {
             nav.style.display = 'flex';
         });
 
         document.addEventListener('click', (e) => {
-            let target = event.target;
-            if (target.classList.contains('nav-item') ||
-            target.classList.contains('menu-cross')) {
-                nav.style.display = 'none';
+            let target = e.target;
+            if (window.innerWidth < 1402) {
+                if (target.classList.contains('nav-item') ||
+                target.classList.contains('menu-cross')) {
+                    nav.style.display = 'none';
+                }
             }
         });
     };
