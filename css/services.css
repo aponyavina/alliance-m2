@@ -1,0 +1,59 @@
+.back {
+    display: flex;
+    align-items: center;
+    margin: 40px 0 80px 0;
+    text-decoration: none;
+}
+
+.back-title {
+    margin-left: 10px;
+    font-family: 'RobotoBold', sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    color: #33291F;
+    text-transform: uppercase;
+}
+
+h2 {
+text-align: left;
+}
+
+h3 {
+    font-family: 'MontserratBold', sans-serif;
+    color: #33291F;
+    font-size: 25px;
+    line-height: 29px;
+}
+
+#service_intro {
+    display: flex;
+}
+
+.service_intro_img {
+    margin-right: 50px;
+}
+
+.service_intro_description {
+    font-size: 20px;
+line-height: 23px;
+font-family: 'RobotoRegular', sans-serif;
+color: #33291F;
+}
+
+#service_info {
+    margin: 150px 0;
+    text-align: center;
+}
+
+
+
+.service_info_text {
+    margin: 0 auto;
+    max-width: 710px;
+    font-family: 'RobotoRegular', sans-serif;
+    font-size: 20px;
+line-height: 23px;
+text-align: center;
+
+color: #33291F;
+}
