@@ -184,6 +184,11 @@
     #footer .logo {
         padding-bottom: 20px;
     }
+
+    .form-text {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -335,6 +340,11 @@
     .guarantee-title {
         margin-bottom: 30px;
     }
+
+    .form-text {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 }
 
 @media screen and (max-width: 559px) {
@@ -355,6 +365,15 @@
 
     .discount-img {
         width: 100px;
+    }
+
+    .form-text {
+        margin-left: 20;
+        margin-right: 20;
+    }
+
+    .form-block {
+        margin: 20px;
     }
 }
 
@@ -514,7 +533,8 @@
     }
 
     .calc-item,
-    .calc-button {
+    .calc-button,
+    .calc-inputs select {
         width: 233px;
         height: 50px;
         margin-bottom: 10px;
@@ -601,5 +621,18 @@
 
     .footer-content .insta-title, .footer-content .mail-title, .footer-content .phone-title  {
         font-size: 16px;
+    }
+
+    .form-close svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .form-title {
+        font-size: 20px;
+    }
+
+    .form-text {
+        font-size: 14px;
     }
 }

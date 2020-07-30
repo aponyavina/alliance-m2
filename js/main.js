@@ -144,11 +144,143 @@ window.addEventListener('DOMContentLoaded', () => {
             let target = e.target;
             if (window.innerWidth < 1402) {
                 if (target.classList.contains('nav-item') ||
-                target.classList.contains('menu-cross')) {
+                    target.classList.contains('menu-cross')) {
                     nav.style.display = 'none';
                 }
+            }
+            if (target.classList.contains('form-close-icon')) {
+                target.closest('.popup-form').style.display = 'none';
             }
         });
     };
     menuButton();
+
+    //calc 
+    const calc = () => {
+
+        const calcBlock = document.querySelector('.calc-block'),
+            calcType = document.getElementById('calc-type'),
+            calcKind = document.getElementById('calc-kind'),
+            calcSquare = calcBlock.querySelector('.calc-square'),
+            calcDay = calcBlock.querySelector('.calc-day'),
+            totalValue = document.getElementById('total'),
+            calcButton = calcBlock.querySelector('.calc-button');
+
+        calcBlock.addEventListener('input', (e) => {
+            let target = e.target;
+            if (!target.matches('select') && target.matches('input')) {
+                target.value = target.value.replace(/[^\d]/g, '');
+            }
+        });
+
+        const countSum = () => {
+            let total = 0,
+                dayValue = 1;
+
+            const typeValue = calcType.options[calcType.selectedIndex].value,
+                kindValue = calcKind.options[calcKind.selectedIndex].value,
+                squareValue = +calcSquare.value;
+
+            if (calcDay.value && calcDay.value < 5) {
+                dayValue *= 2;
+            } else if (calcDay.value && calcDay.value < 10) {
+                dayValue *= 1.5;
+            }
+
+            if (typeValue && kindValue && squareValue) {
+                total = typeValue * kindValue * squareValue * dayValue;
+            }
+
+            if (!typeValue) {
+                calcType.style.borderColor = 'red';
+            } else {
+                calcType.style.borderColor = 'rgba(255, 255, 355, 0.5';
+            }
+            if (!kindValue) {
+                calcKind.style.borderColor = 'red';
+            } else {
+                calcKind.style.borderColor = 'rgba(255, 255, 355, 0.5';
+            }
+            if (!squareValue) {
+                calcSquare.style.borderColor = 'red';
+            } else {
+                calcSquare.style.borderColor = 'rgba(255, 255, 355, 0.5';
+            }
+
+            totalValue.textContent = total;
+        };
+
+        calcButton.addEventListener('click', () => {
+            countSum();
+        });
+    };
+    calc();
+
+    //sendForm
+    const sendfForm = () => {
+        const sendOk = document.getElementById('send-ok');
+        const sendError = document.getElementById('send-error');
+    
+        const input = document.querySelectorAll('input');
+    
+        document.addEventListener('input', (event) => {
+            let target = event.target;
+            if (target.getAttribute('name') === 'user-phone') {
+                target.value = target.value.replace(/[^\d+]/g, '');
+                if (target.value[0] === '+') {
+                    target.value = target.value.slice(0, 12);
+                }
+                if (target.value[0] !== '+') {
+                    target.value = target.value.slice(0, 11);
+                }
+            }
+            if (target.getAttribute('name') === 'user-name') {
+                target.value = target.value.replace(/[^а-я ]/gi, '');
+            }
+            if (target.getAttribute('name') === 'user-email') {
+                target.value = target.value.replace(/[а-я ]/gi, '');
+            }
+        });
+    
+        document.addEventListener('submit', (event) => {
+            let target = event.target;
+            event.preventDefault();
+            const formData = new FormData(target);
+            let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+            postData(body)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw new Error('status network not 200');
+                    }
+                    sendOk.style.display = 'flex';
+                    setTimeout(() => {
+                        sendOk.style.display = 'none';
+                    }, 5000);
+                })
+                .catch((error) => {
+                    sendError.style.display = 'flex';
+                    setTimeout(() => {
+                        sendError.style.display = 'none';
+                    }, 5000);
+                    console.error(error);
+                });
+            for (let i = 0; i < input.length; i++) {
+                input[i].value = '';
+            }
+        });
+        const postData = (formData) => {
+            return fetch('./server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include'
+            });
+        };
+    };
+    sendfForm();
 });
