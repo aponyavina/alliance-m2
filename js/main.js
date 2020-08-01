@@ -147,7 +147,6 @@ window.addEventListener('DOMContentLoaded', () => {
         const burger = document.getElementById('burger');
         const nav = document.querySelector('.nav');
         const complectButton = document.querySelectorAll('.complect_button');
-        console.log(complectButton);
         if (burger) {
             burger.addEventListener('click', () => {
                 nav.style.display = 'flex';
