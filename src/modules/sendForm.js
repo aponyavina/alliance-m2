@@ -2,7 +2,6 @@ const sendfForm = () => {
     'use strict';
     const sendOk = document.getElementById('send-ok');
     const sendError = document.getElementById('send-error');
-
     const input = document.querySelectorAll('input');
 
     document.addEventListener('input', (event) => {
@@ -22,11 +21,25 @@ const sendfForm = () => {
         if (target.getAttribute('name') === 'user-email') {
             target.value = target.value.replace(/[а-я ]/gi, '');
         }
+
     });
 
     document.addEventListener('submit', (event) => {
         let target = event.target;
         event.preventDefault();
+        if (target.querySelector('input[name="user-name"]').value === '') {
+            target.querySelector('input[name="user-name"]').style.background = '#ff000050';
+            return false;
+        } else {
+            target.querySelector('input[name="user-name"]').style.background = 'rgba(255, 255, 255, 0.25)';
+        }
+        if (target.querySelector('input[name="user-phone"]').value === '') {
+            target.querySelector('input[name="user-phone"]').style.background = '#ff000050';
+            return false;
+        } else {
+            target.querySelector('input[name="user-phone"]').style.background = 'rgba(255, 255, 255, 0.25)';
+        }
+
         const formData = new FormData(target);
         let body = {};
         formData.forEach((val, key) => {
@@ -37,6 +50,7 @@ const sendfForm = () => {
                 if (response.status !== 200) {
                     throw new Error('status network not 200');
                 }
+                event.target.reset();
                 sendOk.style.display = 'flex';
                 setTimeout(() => {
                     sendOk.style.display = 'none';

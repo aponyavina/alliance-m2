@@ -1,17 +1,15 @@
-const menuButton = () => {
+const togglePopup = () => {
     'use strict';
     const burger = document.getElementById('burger');
     const nav = document.querySelector('.nav');
     const complectButton = document.querySelectorAll('.complect_button');
-    if (burger) {
-        burger.addEventListener('click', () => {
-            nav.style.display = 'flex';
-        });
-    }
     if (complectButton) {
         complectButton.forEach((element, i) => {
-            element.addEventListener('click', () => {
-                document.getElementById(`popup-complect${i+1}`).style.display = 'flex';
+            element.addEventListener('click', (e) => {
+                let target = e.target;
+                if (target === element) {
+                    document.getElementById(`popup-complect${i+1}`).style.display = 'flex';
+                } 
             });
         });
     }
@@ -31,16 +29,11 @@ const menuButton = () => {
             if (target.closest('.popup-complect')) {
                 target.closest('.popup-complect').style.display = 'none';
             } 
-        } 
-        // if (target.closest('.popup-complect').style.display === 'flex') {
-        //     target = target.closest('popup-block');
-        //     if (!target) {
-                
-        //         target.closest('.popup-complect').style.display = 'none';
-        //     }
-        // }
-
+        }
+        if (target === burger) {
+            nav.style.display = 'flex';
+        }
     });
 };
 
-export default menuButton;
+export default togglePopup;
